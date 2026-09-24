@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+spooler_cleaner.log
+build/
+dist/
+*.spec
