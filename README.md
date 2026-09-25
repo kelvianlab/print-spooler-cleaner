@@ -16,8 +16,8 @@ so you can print again without digging through Services or `services.msc`.
 
 - Windows 10/11
 - Python 3.9+ (uses only the standard library — no extra packages needed)
-- Administrator privileges (the tool detects this and offers to relaunch
-  itself elevated if it isn't already running as admin)
+- Administrator privileges — the tool asks for them once at startup, so the
+  cleanup itself stays a single click
 
 ## How to run
 
@@ -35,6 +35,14 @@ that blocks the entire print queue. The usual manual fix is: open
 `spool\PRINTERS`, and start the service again. This tool automates exactly
 those steps behind one button, with a confirmation step first since it
 deletes files and restarts a system service.
+
+## Why it needs Administrator
+
+Two things here are protected by Windows itself: controlling the Spooler
+service, and deleting files inside `C:\Windows\System32\spool\PRINTERS`.
+Neither is possible from a normal user account, so the prompt cannot be
+removed — only reduced to one prompt at launch, which is what this tool
+does.
 
 ## License
 
