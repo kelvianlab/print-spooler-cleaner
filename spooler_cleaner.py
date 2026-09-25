@@ -74,6 +74,7 @@ class SpoolerCleanerApp:
             f.write(line + "\n")
 
     def on_click(self) -> None:
+        self.button.configure(state="disabled")
         if not is_admin():
             answer = messagebox.askyesno(
                 "Administrator required",
@@ -84,14 +85,15 @@ class SpoolerCleanerApp:
             if answer:
                 if relaunch_as_admin():
                     self.root.destroy()
-                else:
-                    messagebox.showerror(
-                        "Error",
-                        "Could not restart as Administrator. You may have "
-                        "cancelled the permission prompt, or Python is not "
-                        "on your PATH. Try right-clicking spooler_cleaner.py "
-                        "and choosing 'Run as administrator' instead.",
-                    )
+                    return
+                messagebox.showerror(
+                    "Error",
+                    "Could not restart as Administrator. You may have "
+                    "cancelled the permission prompt, or Python is not "
+                    "on your PATH. Try right-clicking spooler_cleaner.py "
+                    "and choosing 'Run as administrator' instead.",
+                )
+            self.button.configure(state="normal")
             return
 
         confirmed = messagebox.askyesno(
@@ -101,9 +103,9 @@ class SpoolerCleanerApp:
         )
         if not confirmed:
             self.log("Cancelled by user.")
+            self.button.configure(state="normal")
             return
 
-        self.button.configure(state="disabled")
         try:
             self.clean_spooler()
         finally:
