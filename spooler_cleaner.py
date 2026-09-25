@@ -31,10 +31,21 @@ def is_admin() -> bool:
         return False
 
 
+def windowless_interpreter() -> str:
+    """pythonw.exe runs the GUI without an attached console window."""
+    pythonw = Path(sys.executable).with_name("pythonw.exe")
+    return str(pythonw) if pythonw.exists() else sys.executable
+
+
 def relaunch_as_admin() -> bool:
     script_path = Path(__file__).resolve()
     result = ctypes.windll.shell32.ShellExecuteW(
-        None, "runas", sys.executable, f'"{script_path}"', str(script_path.parent), 1
+        None,
+        "runas",
+        windowless_interpreter(),
+        f'"{script_path}"',
+        str(script_path.parent),
+        1,
     )
     return result > 32
 

@@ -22,10 +22,14 @@ so you can print again without digging through Services or `services.msc`.
 ## How to run
 
 ```
-python spooler_cleaner.py
+pythonw spooler_cleaner.py
 ```
 
-Click **Clear & Restart Spooler**, confirm the prompt, and watch the log.
+Approve the Administrator prompt, then click **Clear & Restart Spooler**,
+confirm, and watch the log.
+
+Use `pythonw` rather than `python` so no console window opens alongside the
+GUI — `python.exe` always attaches one.
 
 ## How it works
 
