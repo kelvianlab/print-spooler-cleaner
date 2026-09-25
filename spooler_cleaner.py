@@ -24,10 +24,12 @@ def is_admin() -> bool:
         return False
 
 
-def relaunch_as_admin() -> None:
-    ctypes.windll.shell32.ShellExecuteW(
-        None, "runas", sys.executable, " ".join(sys.argv), None, 1
+def relaunch_as_admin() -> bool:
+    script_path = str(Path(__file__).resolve())
+    result = ctypes.windll.shell32.ShellExecuteW(
+        None, "runas", sys.executable, f'"{script_path}"', str(Path(script_path).parent), 1
     )
+    return result > 32
 
 
 def run_service_command(action: str) -> tuple[bool, str]:
@@ -80,8 +82,16 @@ class SpoolerCleanerApp:
                 "Restart as Administrator now?",
             )
             if answer:
-                relaunch_as_admin()
-                self.root.destroy()
+                if relaunch_as_admin():
+                    self.root.destroy()
+                else:
+                    messagebox.showerror(
+                        "Error",
+                        "Could not restart as Administrator. You may have "
+                        "cancelled the permission prompt, or Python is not "
+                        "on your PATH. Try right-clicking spooler_cleaner.py "
+                        "and choosing 'Run as administrator' instead.",
+                    )
             return
 
         confirmed = messagebox.askyesno(
