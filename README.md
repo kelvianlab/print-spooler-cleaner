@@ -1,7 +1,7 @@
 # Print Spooler Cleaner
 
 A one-button Windows tool that clears a jammed print queue: it stops the
-Print Spooler service, deletes stuck print jobs, and restarts the service —
+Print Spooler service, deletes stuck print jobs, and restarts the service,
 so you can print again without digging through Services or `services.msc`.
 
 ## What it does
