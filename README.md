@@ -15,8 +15,8 @@ so you can print again without digging through Services or `services.msc`.
 ## Requirements
 
 - Windows 10/11
-- Python 3.9+ (uses only the standard library — no extra packages needed)
-- Administrator privileges — the tool asks for them once at startup, so the
+- Python 3.9+ (uses only the standard library, no extra packages needed)
+- Administrator privileges, the tool asks for them once at startup, so the
   cleanup itself stays a single click
 
 ## How to run
@@ -45,7 +45,7 @@ deletes files and restarts a system service.
 Two things here are protected by Windows itself: controlling the Spooler
 service, and deleting files inside `C:\Windows\System32\spool\PRINTERS`.
 Neither is possible from a normal user account, so the prompt cannot be
-removed — only reduced to one prompt at launch, which is what this tool
+removed, only reduced to one prompt at launch, which is what this tool
 does.
 
 ## License
