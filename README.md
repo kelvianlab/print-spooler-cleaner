@@ -14,7 +14,7 @@ so you can print again without digging through Services or `services.msc`.
 
 ## Requirements
 
-- Windows 10/11
+- Windows 11
 - Python 3.9+ (uses only the standard library, no extra packages needed)
 - Administrator privileges, the tool asks for them once at startup, so the
   cleanup itself stays a single click
